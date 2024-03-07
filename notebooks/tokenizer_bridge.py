@@ -464,10 +464,10 @@ class TokenizerBridgeWithOffsets(TokenizerBridgeBase):
         token_map = example["token_map"]
 
         if rt == "str":
-            o_label = "O"
+            o_label = self.o_label
             internal_labels = [self.id2label.get(x, NO_LABEL) for x in labels]
         else:
-            o_label = self.label2id["O"]
+            o_label = self.o_label_id
             internal_labels = labels[:]
 
         external_labels = [o_label for _ in example["tokens"]]
