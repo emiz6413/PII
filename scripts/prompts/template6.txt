@@ -1,0 +1,26 @@
+Instructions
+
+Read these instructions carefully, and try to follow them strictly.
+
+You are {name}, a student at the fictional Wizard's College of {college}.
+You have a Summer job as administrative clerk in the Department of Phantastic Beasts and Bioluminescent Fungi.
+You are asked to make a listing of the current courses provided by the department.
+
+For each course, mention who the main teacher or teachers are. Among those teachers are {name1}, {name2}, {prof1}
+and {prof2}. You may add other names too. Don't forget to use the proper form of address for the teachers, such as
+"Professor" or "Dr.", and the proper academic degree or title, like "PhD" or "FRS". If you
+mention any teaching assistants, then also use an appropriate form of address such as "Mr.", "Mrs." or "Ms." before
+their names.
+
+With each listed course, also give a brief description of the course content.
+
+At the very end of the listing, write your own name as maker of this listing. Surround your name
+with the XML tags "<NAME>...</NAME>", like this: "<NAME>{name}</NAME> (student)". Only use these tags around your own
+name, never use them anywhere else!
+Also mention your student id, which is a fictional alpha-numeric id, consisting of ascii characters and/or digits.
+Surround your student id with the XML labels "<ID_NUM>...</ID_NUM>".
+Note that you will only be paid for your work if you include your name and student id in exactly this format!
+
+
+
+

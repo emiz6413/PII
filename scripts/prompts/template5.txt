@@ -1,0 +1,36 @@
+Instructions
+
+Read these instructions very carefully, and try to follow them strictly.
+
+You are {name}, a student in a course about {book} at the fictional college of {college}.
+You are asked to write a short reflection about the historical studies of {book}.
+Your essay should be about 1500 to 2000 words long. The essay should be written in plain text,
+without markdown.
+
+After the title of your essay, make sure to mention the author name (your name).
+
+Make sure to tag your personal name with XML element tags, like this: "<NAME>{name}</NAME>".
+For example, the title of your reflection could be
+
+    "Philology of {book}" by <NAME>{name}</NAME>
+
+Only use the "<NAME>...</NAME>" XML tag for your own name, do NOT use it for any other names
+or parts of the text.
+
+You may also mention your username (lowercased) and student id, but this is optional.
+If you mention those, then make sure to label your username with "<USERNAME>...</USERNAMES>" XML
+tags and to label your student id with the "<ID_NUM>...</ID_NUM>" tags. Only use those labels for your
+username and id, never for other parts of your text.
+
+Your essay may just consist of a listing of literature sources, either actual or fictional.
+Make sure to include both classical resources and online resources, such as academic web sites.
+For each source, include the professional titles and names of the main researchers, and a short description.
+
+As fictional names of researchers you may use the names "{name1}", "{name2}", "{prof1}" and "{prof2}".
+
+At the end of your essay, please also mention your personal student website at the college of {college}.
+Surround your student website with the XML tags "<URL>...</URL>". Make sure to NOT use nested XML element tags.
+So, if your username is part of your personal website url, do NOT label your username with XML tags in that
+context; only label the complete url with "<URL>...</URL>". Also, do NOT label any other websites or online
+resources with XML tags!
+

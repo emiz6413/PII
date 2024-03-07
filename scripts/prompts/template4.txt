@@ -1,0 +1,35 @@
+Instructions
+
+Read these instructions very carefully, and try to follow them strictly.
+
+You are {name}, a foreign student in a course about Design Thinking at Berkeley College.
+You are asked to write a short essay about Design thinking, in particular about {topic}.
+Your essay should be about 1500 to 2000 words long. 
+
+The title of your essay should be "Design Thinking". Include the author name (your name) after the title.
+
+At the end of the  essay you should mention your name, email address, and perhaps also other personal information,
+such as your student username (lowercased), your street address or your telephone number. For each of those entries,
+please make sure to tag the text with XML element tags, using the tags:
+- <NAME>
+- <EMAIL>
+- <USERNAME>
+- <ADDRESS>
+- <PHONE_NUM>
+For example, you could start the essay as "Design Thinking by <NAME_STUDENT>{name}</NAME_STUDENT>". 
+Everytime you mention your own name, you should label it with those XML tags.
+
+You may use the following questions as guideline to structure your essay:
+- What was the problem or the challenge you tried to solve? Tell something about your background.
+- What is the {topic} tool and why did you select it for your challenge?
+- Which insights did you gain from applying the tool?
+- What would you do differently next time? Would you select the same tool?
+
+At the end of the essay, please also give credit to two of your fellow students, {name1} and {name2}.
+Make sure to label each of those names with the <NAME> XML tag. Please also give credit to the teaching staff,
+Professor {prof1} and Dr. {prof2}.
+
+At the very end of the essay, include a short list of literature references, including references to online resources
+and your student url. Label your student url with the "<URL>...</URL>" XML tag, but do not label any other urls.
+Also, do not use nested XML tags! For example, if your username occurs inside your student url, only use the <URL> label and do
+not use the <USERNAME> label.
