@@ -14,10 +14,17 @@ from transformers import AutoTokenizer
 #   input), unless those tokens are inside an entity span!
 
 
+ZWSP = chr(0x200B)
+
+
 def inside_out(dd: dict) -> dict:
     assert all(hasattr(v, "__hash__") for v in dd.values())
     assert len(dd) == len(set(dd.values()))
     return dict((v, k) for (k, v) in dd.items())
+
+
+def isspace(c: str) -> bool:
+    return c.isspace() or c == ZWSP
 
 
 class TokenizerBridgeBase:
@@ -284,8 +291,18 @@ class TokenizerBridge(TokenizerBridgeBase):
             internal_labels=internal_labels,
         )
 
+    def __str__(self):
+        return (
+            f"TokenizerBridge(tokenizer={self.tokenizer.__class__.__name__}"
+            f"({self.tokenizer.name_or_path!r}), "
+            f"label2id={self.label2id}, "
+            f"max_length={self.max_length}, o_label={self.o_label}, "
+            f"o_label_id={self.o_label_id}, label_all_word_pieces={self.label_all_word_pieces})"
+        )
 
-SKIP_ALL_WS = False
+    __repr__ = __str__
+
+
 USE_BACKFILL = False
 
 
@@ -386,15 +403,19 @@ class TokenizerBridgeWithOffsets(TokenizerBridgeBase):
             if start == end == 0:
                 continue
 
-            if token_map[start] < 0:  # skip ws
+            if token_map[start] < 0:  # skip added ws
                 start += 1
 
-            if SKIP_ALL_WS:
-                while start < len(token_map) and tokens[token_map[start]].isspace():
-                    start += 1
-            else:  # seems wrong
-                if start < len(token_map) and tokens[token_map[start]].isspace():
-                    start += 1
+            # In the Deberta tokenizer the token spans include exactly _one_
+            # preceding space (if there is a space just before the token).
+            # So in principle it should be ok to use 'if' instead of 'while' here.
+            #
+            # Deberta also treats U+200B as white-space character, even though
+            # Python and Spacy do NOT treat that as such. So, we should not
+            # simply use the Python isspace function!
+
+            while start < len(token_map) and isspace(tokens[token_map[start]]):
+                start += 1
 
             if start >= len(token_map):
                 nskipped = len(internal_labels) - j
@@ -480,7 +501,9 @@ class TokenizerBridgeWithOffsets(TokenizerBridgeBase):
             if token_map[start] < 0:
                 start += 1
 
-            while start < len(token_map) and tokens[token_map[start]].isspace():
+            # See comments in convert_external_to_internal
+
+            while start < len(token_map) and isspace(tokens[token_map[start]]):
                 start += 1
 
             if start >= len(token_map):
@@ -541,6 +564,19 @@ class TokenizerBridgeWithOffsets(TokenizerBridgeBase):
                 )
             )
         return super().there_and_back_again(example, redo=redo, **kwargs)
+
+    def __str__(self):
+        return (
+            f"TokenizerBridgeWithOffsets(tokenizer={self.tokenizer.__class__.__name__}"
+            f"({self.tokenizer.name_or_path!r}), "
+            f"label2id={self.label2id}, "
+            f"max_length={self.max_length}, o_label={self.o_label}, "
+            f"o_label_id={self.o_label_id}, label_all_word_pieces={self.label_all_word_pieces}, "
+            f"use_first_piece_for_label={self.use_first_piece_for_label}, "
+            f"use_last_piece_for_label={self.use_last_piece_for_label})"
+        )
+
+    __repr__ = __str__
 
 
 def test1(model="microsoft/deberta-v3-base", klas=TokenizerBridge):
