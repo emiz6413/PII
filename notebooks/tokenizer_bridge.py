@@ -24,7 +24,7 @@ def inside_out(dd: dict) -> dict:
 
 
 def isspace(c: str) -> bool:
-    return c.replace(ZWSP, "").isspace()
+    return c.replace(ZWSP, " ").isspace()
 
 
 class TokenizerBridgeBase:
